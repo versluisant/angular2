@@ -9,19 +9,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var AppComponent = (function () {
-    function AppComponent() {
-        this.title = "Heroes Application";
+var heroes_service_1 = require('./heroes.service');
+var DashBoardComponent = (function () {
+    function DashBoardComponent(heroService) {
+        this.heroService = heroService;
+        this.heroes = [];
     }
-    AppComponent = __decorate([
+    DashBoardComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.heroService.getHeroes().then(function (heroes) { return _this.heroes = heroes.slice(1, 5); });
+    };
+    DashBoardComponent = __decorate([
         core_1.Component({
-            selector: 'my-app',
-            template: "\n    <h1>{{title}}</h1>\n    \n    <nav>\n        <a routerLink=\"/dashboard\">DashBoard</a>\n        <a routerLink=\"/heroes\">Heroes</a>\n    </nav>\n\n    <router-outlet></router-outlet>\n    ",
-            styleUrls: ['app.component.css']
+            moduleId: module.id,
+            selector: 'my-dashboard',
+            templateUrl: 'dashboard.component.html',
+            styleUrls: ['dashboard.component.css']
         }), 
-        __metadata('design:paramtypes', [])
-    ], AppComponent);
-    return AppComponent;
+        __metadata('design:paramtypes', [heroes_service_1.HeroService])
+    ], DashBoardComponent);
+    return DashBoardComponent;
 }());
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+exports.DashBoardComponent = DashBoardComponent;
+//# sourceMappingURL=dashboard.component.js.map
